@@ -5,23 +5,50 @@ public class listTester {
         GenericLinkedList list = new GenericLinkedList();
         GenericArrayList arrayList = new GenericArrayList();
 
-        arrayList.add(new Person(20, "Hegarty", "Dermot"));
-        arrayList.add(new Person(23,"Minchin", "Tim"));
-        arrayList.add(new Person(19, "DiCamillo", "Kate"));
+//        arrayList.add(new Person(20, "Hegarty", "Dermot"));
+//        arrayList.add(new Person(23,"Minchin", "Tim"));
+//        arrayList.add(new Person(19, "DiCamillo", "Kate"));
 
 
-        for(Object currElement: arrayList)
-        {
-            System.out.println(currElement);
-        }
+//        for(Object currElement: arrayList)
+//        {
+//            System.out.println(currElement);
+//        }
 
 
-//
+
+
+        list.add("abc");
+        list.add(1);
+        list.add("a");
+        list.add("jkl");
+        list.add("Niall");
+
+        list.printList();
+        System.out.println("\n");
+        list.add(2,"This is a new element");
+        list.printList();
+
+        System.out.println("\n");
+        list.add(0, "You better fucking work!!!!");
+        list.printList();
+
+        System.out.println("\n");
+        list.set(1, "My lecturer is really nice");
+        list.printList();
+
+        System.out.println("\n");
+        list.remove(6);
+        list.printList();
+
+
 //        list.add("abc");
 //        list.add(1);
 //        list.add("a");
 //        list.add("jkl");
 //        list.add("Niall");
+
+//        list.add()
 //
 //        if(!list.isEmpty())
 //        {

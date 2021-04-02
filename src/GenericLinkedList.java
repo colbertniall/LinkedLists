@@ -1,6 +1,6 @@
 import java.util.Iterator;
 
-public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
+public class GenericLinkedList<T> implements IList<T> {
     Node head; // head of list
     Node tail; // end of list
 
@@ -54,6 +54,10 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
             head = newNode;
             tail = head;
         } else {
+            if (index == 0) {
+                addToStart(element);
+                return;
+            }
             pointNode.next = head;
             Node trackNode = pointNode;
             for (int i = 0; i < index; ++i) {
@@ -63,14 +67,15 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
             newNode.next = trackNode.next;
             trackNode.next = newNode;
         }
+        numElements++;
     }
 
     @Override
     public T set(int index, T element) {
-        Node newNode = new Node(element);
-
-
-        return null;
+        T oldNodeData = get(index);
+        remove(oldNodeData);
+        add(index, element);
+        return oldNodeData;
     }
 
     public T get(int index) {
@@ -149,22 +154,18 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
     //doesn't work
     @Override
     public T remove(int index) {
-        return null;
+        if (isEmpty()) {
+            return null;
+        } else if (index > size()) {
+            throw new IndexOutOfBoundsException("The index is greater than list size");
+        } else if (index < 0) {
+            throw new IndexOutOfBoundsException("Index can't be less than 0, dumbass");
+        } else  {
+            T removeData = get(index);
+            remove(removeData);
+            return removeData;
+        }
     }
-//        Node current = head;
-//        Node previous = head;
-//
-//        if (isEmpty()) {
-//            throw new IndexOutOfBoundsException("The list is empty");
-//        } else if (index > size()) {
-//            throw new IndexOutOfBoundsException("The index is greater than list size");
-//        } else if (index <= size()) {
-//            while (head != null) {
-//
-//            }
-//        }
-//        System.out.println("");
-//    }
 //}
 
     /* Linked list Node*/

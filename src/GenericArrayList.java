@@ -4,7 +4,7 @@ import java.util.NoSuchElementException;
 /**
  * A simplified ArrayList class that stores Strings
  */
-public class GenericArrayList<T> implements IList<T>, Iterable<T>{
+public class GenericArrayList<T> implements IList<T> {
     /**
      * This will hold our data - remember an ArrayList is nothing more than a managed array
      */
@@ -87,14 +87,10 @@ public class GenericArrayList<T> implements IList<T>, Iterable<T>{
      */
     public T get(int index)
     {
-//        if(index >= nextFreeLoc)
-//        {
-//            return null;
-//        }
         try {
             return buffer[index];
         } catch (IndexOutOfBoundsException ex) {
-            System.out.println("Caught index out of bounds excpetion while trying to get an element at index " + index);
+            System.out.println("Caught index out of bounds exception while trying to get an element at index " + index);
             return null;
         }
     }
