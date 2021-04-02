@@ -38,7 +38,7 @@ public class GenericArrayList<T> implements IList<T>, Iterable<T>{
      *
      * @param elem The data to be added to the end of the managed array
      */
-    public void add(T elem)
+    public void add(T elem) throws IndexOutOfBoundsException
     {
         growArrayIfNeeded(); //I've farmed this out to a private "helper" method
 
@@ -87,14 +87,13 @@ public class GenericArrayList<T> implements IList<T>, Iterable<T>{
      */
     public T get(int index)
     {
-        if(index >= nextFreeLoc)
-        {
-            return null;
-        }
-        try{
+//        if(index >= nextFreeLoc)
+//        {
+//            return null;
+//        }
+        try {
             return buffer[index];
-        } catch (IndexOutOfBoundsException ex)
-        {
+        } catch (IndexOutOfBoundsException ex) {
             System.out.println("Caught index out of bounds excpetion while trying to get an element at index " + index);
             return null;
         }
