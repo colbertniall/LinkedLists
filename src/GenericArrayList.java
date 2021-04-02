@@ -1,7 +1,10 @@
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+
 /**
  * A simplified ArrayList class that stores Strings
  */
-public class GenericArrayList<T> implements IList<T>{
+public class GenericArrayList<T> implements IList<T>, Iterable<T>{
     /**
      * This will hold our data - remember an ArrayList is nothing more than a managed array
      */
@@ -71,6 +74,12 @@ public class GenericArrayList<T> implements IList<T>{
             nextFreeLoc++;
         }
     }
+
+    @Override
+    public T set(int index, T element) {
+        return null;
+    }
+
     /** Retrieve an element from the list
      *
      * @param index the location to be return
@@ -82,7 +91,13 @@ public class GenericArrayList<T> implements IList<T>{
         {
             return null;
         }
-        return buffer[index];
+        try{
+            return buffer[index];
+        } catch (IndexOutOfBoundsException ex)
+        {
+            System.out.println("Caught index out of bounds excpetion while trying to get an element at index " + index);
+            return null;
+        }
     }
 
 
@@ -119,8 +134,9 @@ public class GenericArrayList<T> implements IList<T>{
      * Remove the element at the specified index.
      *
      * @param index the index of the element that should be removed
+     * @return
      */
-    public void remove(int index)
+    public T remove(int index)
     {
         //if it's valid
         if (index <= nextFreeLoc)
@@ -133,6 +149,7 @@ public class GenericArrayList<T> implements IList<T>{
 
             nextFreeLoc--;
         }
+        return null;
     }
 
 
@@ -151,6 +168,11 @@ public class GenericArrayList<T> implements IList<T>{
             }
         }
         return matchFound;
+    }
+
+    @Override
+    public Iterator<T> iterator() {
+        return new GenericArrayListIterator();
     }
 
     /**
@@ -203,5 +225,44 @@ public class GenericArrayList<T> implements IList<T>{
         }
 
         return "MyStringArrayList[" + data + " ]";
+    }
+
+
+    //This is an inner-class of the GenericArrayList class
+    class GenericArrayListIterator implements Iterator<T> {
+        private int cursor = 0;
+
+        /**
+         * Returns {@code true} if the iteration has more elements.
+         * (In other words, returns {@code true} if {@link #next} would
+         * return an element rather than throwing an exception.)
+         *
+         * @return {@code true} if the iteration has more elements
+         */
+        @Override
+        public boolean hasNext() {
+            return cursor < nextFreeLoc;
+        }
+
+        /**
+         * Returns the next element in the iteration.
+         *
+         * @return the next element in the iteration
+         * @throws NoSuchElementException if the iteration has no more elements
+         */
+        @Override
+        public T next() {
+            if (cursor == nextFreeLoc) {
+                throw new NoSuchElementException();
+            }
+            return buffer[cursor++];
+        }
+
+        @Override
+        //You do not have to provide functionality for the remove() method
+        //We already have (non-iterator) mechanism for removing elements
+        public void remove() {
+            throw new UnsupportedOperationException("not supported yet");
+        }
     }
 }
