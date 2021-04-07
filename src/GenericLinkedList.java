@@ -1,6 +1,7 @@
 import java.util.Iterator;
+import java.util.NoSuchElementException;
 
-public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
+public class GenericLinkedList<T> implements IList<T> {
     Node head; // head of list
     Node tail; // end of list
 
@@ -12,6 +13,7 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
         head = newNode;
         numElements++;
     }
+
 
     public void add(T elem) {
         Node newNode = new Node(elem);
@@ -44,7 +46,6 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
          */
     }
 
-    //Does not work with index set to 0
     @Override
     public void add(int index, T element) {
         Node newNode = new Node(element);
@@ -54,6 +55,10 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
             head = newNode;
             tail = head;
         } else {
+            if (index == 0) {
+                addToStart(element);
+                return;
+            }
             pointNode.next = head;
             Node trackNode = pointNode;
             for (int i = 0; i < index; ++i) {
@@ -63,14 +68,15 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
             newNode.next = trackNode.next;
             trackNode.next = newNode;
         }
+        numElements++;
     }
 
     @Override
     public T set(int index, T element) {
-        Node newNode = new Node(element);
-
-
-        return null;
+        T oldNodeData = get(index);
+        remove(oldNodeData);
+        add(index, element);
+        return oldNodeData;
     }
 
     public T get(int index) {
@@ -84,7 +90,7 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
             }
             current = current.next;
         }
-        return current.data;
+        return (T) current.data;
     }
 
     public boolean contains(T searchItem) {
@@ -100,7 +106,7 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new GenericLinkedListIterator();
     }
 
     public boolean remove(T elementToRemove) {
@@ -146,29 +152,24 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
         return numElements;
     }
 
-    //doesn't work
     @Override
     public T remove(int index) {
-        return null;
+        if (isEmpty()) {
+            return null;
+        } else if (index > size()) {
+            throw new IndexOutOfBoundsException("The index is greater than list size");
+        } else if (index < 0) {
+            throw new IndexOutOfBoundsException("Index can't be less than 0, dumbass");
+        } else  {
+            T removeData = get(index);
+            remove(removeData);
+            return removeData;
+        }
     }
-//        Node current = head;
-//        Node previous = head;
-//
-//        if (isEmpty()) {
-//            throw new IndexOutOfBoundsException("The list is empty");
-//        } else if (index > size()) {
-//            throw new IndexOutOfBoundsException("The index is greater than list size");
-//        } else if (index <= size()) {
-//            while (head != null) {
-//
-//            }
-//        }
-//        System.out.println("");
-//    }
 //}
 
     /* Linked list Node*/
-    private class Node {
+    private class Node <T> {
         T data;
         Node next;
 
@@ -177,19 +178,46 @@ public class GenericLinkedList<T> implements IList<T>, Iterable<T> {
             data = d;
             next = null;
         }
+
+        public Node getNext() {
+            return next;
+        }
+
+        public T getData() {
+            return data;
+        }
     }
 
-    private class GenericLinkedListIterator implements Iterator<T>
-    {
+    class GenericLinkedListIterator implements Iterator<T> {
+
+        private Node<T> current = null;
 
         @Override
         public boolean hasNext() {
+            if(current == null && head != null)
+            {
+                return true;
+            }
+            else if(current != null)
+            {
+                return current.getNext() != null;
+            }
             return false;
         }
 
         @Override
         public T next() {
-            return null;
+            if(current == null && head != null)
+            {
+                current = head;
+                return (T) head.getData();
+            }
+            else if(current != null)
+            {
+                current = current.getNext();
+                return current.getData();
+            }
+            throw  new NoSuchElementException();
         }
     }
 }
