@@ -57,6 +57,8 @@ public class listTester {
             System.out.println(currElement + " ");
         }
 
+
+        //TestingStack
         GenericStack<String> s = new GenericStack<String>();
         s.empty();
         s.push("November Rain");
@@ -69,8 +71,17 @@ public class listTester {
         System.out.println(s.toString());
         s.empty();
 
-        s.pop();
+        //Pop not working
+        //s.pop();
         System.out.println(s.toString());
+
+        //Testing Queue
+        GenericQueue genQueue = new GenericQueue();
+        genQueue.enqueue(1);
+        genQueue.enqueue(2);
+        genQueue.enqueue(3);
+        genQueue.enqueue(4);
+        System.out.println(genQueue.toString());
 //
 //        System.out.println(s);
 //        s.pop();
