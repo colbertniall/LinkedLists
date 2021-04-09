@@ -134,17 +134,23 @@ public class GenericArrayList<T> implements IList<T> {
     public T remove(int index)
     {
         //if it's valid
+        T returnedValue = null;
         if (index <= nextFreeLoc)
         {
+            returnedValue = get(index);
             //Close the gap - move elements 1 position to the left
             for( int i = index; i<nextFreeLoc; i++)
             {
-                buffer[i] = buffer[i+1];
+                if (nextFreeLoc - i == 1) {
+                    buffer[i] = null;
+                } else {
+                    buffer[i] = buffer[i + 1];
+                }
             }
 
             nextFreeLoc--;
         }
-        return null;
+        return returnedValue;
     }
 
 

@@ -148,6 +148,18 @@ public class GenericLinkedList<T> implements IList<T> {
         }
     }
 
+    public String getList() {
+        StringBuffer buff = new StringBuffer();
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + ", ");
+            buff.append(current.data);
+            buff.append(", ");
+            current = current.next;
+        }
+        return buff.toString();
+    }
+
     public int size() {
         return numElements;
     }

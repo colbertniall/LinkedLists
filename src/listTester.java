@@ -20,60 +20,60 @@ public class listTester {
 
 
 
-        list.add("abc");
-        list.add(1);
-        list.add("a");
-        list.add("jkl");
-        list.add("Niall");
-
-        list.printList();
-        System.out.println("\n");
-        list.add(2,"This is a new element");
-        list.printList();
-
-        System.out.println("\n");
-        list.add(0, "You better fucking work!!!!");
-        list.printList();
-
-        System.out.println("\n");
-        list.set(1, "My lecturer is really nice");
-        list.printList();
-
-        System.out.println("\n");
-        list.remove(6);
-        list.printList();
-
-        System.out.println("******WWWWWWWWWWWWWW**********");
-
-        GenericArrayList<Integer> aList = new GenericArrayList<>();
-        aList.add(5); aList.add(2); aList.add(3);
-        for(Integer currElement: aList) {
-            System.out.println(currElement + " ");
-        }
-
-        GenericLinkedList<String> bList = new GenericLinkedList<>();
-        bList.add("Niall"); bList.add("Eva"); bList.add("Dan");
-        for(String currElement: bList) {
-            System.out.println(currElement + " ");
-        }
+//        list.add("abc");
+//        list.add(1);
+//        list.add("a");
+//        list.add("jkl");
+//        list.add("Niall");
+//
+//        list.printList();
+//        System.out.println("\n");
+//        list.add(2,"This is a new element");
+//        list.printList();
+//
+//        System.out.println("\n");
+//        list.add(0, "You better fucking work!!!!");
+//        list.printList();
+//
+//        System.out.println("\n");
+//        list.set(1, "My lecturer is really nice");
+//        list.printList();
+//
+//        System.out.println("\n");
+//        list.remove(6);
+//        list.printList();
+//
+//        System.out.println("******WWWWWWWWWWWWWW**********");
+//
+//        GenericArrayList<Integer> aList = new GenericArrayList<>();
+//        aList.add(5); aList.add(2); aList.add(3);
+//        for(Integer currElement: aList) {
+//            System.out.println(currElement + " ");
+//        }
+//
+//        GenericLinkedList<String> bList = new GenericLinkedList<>();
+//        bList.add("Niall"); bList.add("Eva"); bList.add("Dan");
+//        for(String currElement: bList) {
+//            System.out.println(currElement + " ");
+//        }
 
 
         //TestingStack
-        GenericStack<String> s = new GenericStack<String>();
-        s.empty();
-        s.push("November Rain");
-        System.out.println(s.peek());
-        s.push("Sweet Child");
-        System.out.println(s.peek());
-        s.push("Welcome to the Jungle");
-        System.out.println(s.peek());
-
-        System.out.println(s.toString());
-        s.empty();
-
-        //Pop not working
-        //s.pop();
-        System.out.println(s.toString());
+//        GenericStack<String> s = new GenericStack<String>();
+//        s.empty();
+//        s.push("November Rain");
+//        System.out.println(s.peek());
+//        s.push("Sweet Child");
+//        System.out.println(s.peek());
+//        s.push("Welcome to the Jungle");
+//        System.out.println(s.peek());
+//
+//        System.out.println(s.toString());
+//        s.empty();
+//
+//        //Pop not working
+//        s.pop();
+//        System.out.println(s.toString());
 
         //Testing Queue
         GenericQueue genQueue = new GenericQueue();

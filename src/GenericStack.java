@@ -13,7 +13,7 @@ public class GenericStack<T> implements IStack<T>{
 
     @Override
     public void push(T element) {
-        genArrList.add(element);
+        genArrList.add(0, element);
         lastAdded = element;
     }
 
@@ -23,8 +23,9 @@ public class GenericStack<T> implements IStack<T>{
         {
             return null;
         }
-        else
-        return genArrList.remove(genArrList.size() - 1);
+        else {
+            return genArrList.remove(genArrList.size() - 1);
+        }
     }
 
     @Override
