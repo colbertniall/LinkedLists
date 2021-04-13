@@ -73,6 +73,10 @@ public class GenericArrayList<T> implements IList<T> {
             //Obviously, we've added an extra element so we must update to reflect this
             nextFreeLoc++;
         }
+        else
+        {
+            throw new IndexOutOfBoundsException("Can't add here index is out of bounds");
+        }
     }
 
     @Override
@@ -90,8 +94,7 @@ public class GenericArrayList<T> implements IList<T> {
         try {
             return buffer[index];
         } catch (IndexOutOfBoundsException ex) {
-            System.out.println("Caught index out of bounds exception while trying to get an element at index " + index);
-            return null;
+            throw new IndexOutOfBoundsException("Caught index out of bounds exception while trying to get an element at index " + index);
         }
     }
 
@@ -134,17 +137,23 @@ public class GenericArrayList<T> implements IList<T> {
     public T remove(int index)
     {
         //if it's valid
+        T returnedValue = null;
         if (index <= nextFreeLoc)
         {
+            returnedValue = get(index);
             //Close the gap - move elements 1 position to the left
             for( int i = index; i<nextFreeLoc; i++)
             {
-                buffer[i] = buffer[i+1];
+                if (nextFreeLoc - i == 1) {
+                    buffer[i] = null;
+                } else {
+                    buffer[i] = buffer[i + 1];
+                }
             }
 
             nextFreeLoc--;
         }
-        return null;
+        return returnedValue;
     }
 
 
@@ -260,4 +269,6 @@ public class GenericArrayList<T> implements IList<T> {
             throw new UnsupportedOperationException("not supported yet");
         }
     }
+
+
 }

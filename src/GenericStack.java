@@ -1,35 +1,35 @@
+import java.io.Serializable;
 import java.util.EmptyStackException;
+import java.util.Iterator;
 
 public class GenericStack<T> implements IStack<T>{
-    private GenericArrayList<T> genArrList;
-    private GenericLinkedList<T> genLinkedList;
+    private IList list;
     T lastAdded;
 
-    public GenericStack()
-    {
-        genArrList = new GenericArrayList<T>();
+    public GenericStack(IList list) {
+        this.list = list;
     }
-
 
     @Override
     public void push(T element) {
-        genArrList.add(element);
+        list.add(0, element);
         lastAdded = element;
     }
 
     @Override
     public T pop() {
-        if(genArrList.isEmpty())
+        if(list.isEmpty())
         {
             return null;
         }
-        else
-        return genArrList.remove(genArrList.size() - 1);
+        else {
+            return (T) list.remove(list.size() - 1);
+        }
     }
 
     @Override
     public T peek() {
-        if(genArrList!=null)
+        if(list!=null)
         {
             return lastAdded;
         }
@@ -38,7 +38,7 @@ public class GenericStack<T> implements IStack<T>{
 
     @Override
     public boolean empty() {
-        if(genArrList.size() == 0)
+        if(list.size() == 0)
         {
             System.out.println("The List is empty");
             return true;
@@ -47,8 +47,22 @@ public class GenericStack<T> implements IStack<T>{
         return false;
     }
 
+    class GenericStackIterator implements Iterator<T>
+    {
+
+    @Override
+    public boolean hasNext() {
+        return false;
+    }
+
+    @Override
+    public T next() {
+        return null;
+    }
+}
+
     @Override
     public String toString() {
-        return "GenericStack elements = {" + genArrList + " }";
+        return "GenericStack elements = { " + list + "}";
     }
 }

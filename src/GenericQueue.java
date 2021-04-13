@@ -1,29 +1,28 @@
 import java.util.NoSuchElementException;
 
 public class GenericQueue <T> implements IQueue <T>{
-    private GenericLinkedList<T> genLinkedList = new GenericLinkedList<>();
-    private GenericArrayList<T> genArrayList = new GenericArrayList<>();
+    private IList list;
+    private T topOfQueue;
 
-//    public GenericQueue(GenericLinkedList<T> genLinkedList) {
-//        this.genLinkedList = genLinkedList;
-//    }
-//
-//    public GenericQueue(GenericArrayList<T> genArrayList) {
-//        this.genArrayList = genArrayList;
-//    }
-//
-//
+    public GenericQueue(IList list) {
+        this.list = list;
+    }
 
     @Override
     public void enqueue(T element) {
-            genLinkedList.addToStart((T) element);
+        list.add(element);
+        topOfQueue = element;
     }
-
-
 
     @Override
     public T dequeue() {
-        return null;
+        if(list.isEmpty())
+        {
+            throw new NoSuchElementException("There is nothing in the queue");
+        }
+        else {
+            return (T) list.remove(list.size() - 1);
+        }
     }
 
     @Override
@@ -32,20 +31,22 @@ public class GenericQueue <T> implements IQueue <T>{
         {
             throw new NoSuchElementException("The list is empty");
         }
-        else return (T) genLinkedList.head;
+        else {
+            return (T) list.get(0);
+        }
     }
 
     @Override
     public boolean empty() {
-        if(genLinkedList.isEmpty())
+        if(list.isEmpty())
         {
             return true;
         }
         return false;
     }
 
-//    @Override
-//    public String toString() {
-//        return "GenericQueue{}" + genLinkedList.printList();
-//    }
+    @Override
+    public String toString() {
+        return "GenericQueue{} " + list;
+    }
 }

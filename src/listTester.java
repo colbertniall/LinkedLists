@@ -59,28 +59,31 @@ public class listTester {
 
 
         //TestingStack
-        GenericStack<String> s = new GenericStack<String>();
-        s.empty();
-        s.push("November Rain");
-        System.out.println(s.peek());
-        s.push("Sweet Child");
-        System.out.println(s.peek());
-        s.push("Welcome to the Jungle");
-        System.out.println(s.peek());
+        GenericStack genericStack = new GenericStack(new GenericArrayList());
+        genericStack.empty();
+        genericStack.push("November Rain");
+        System.out.println(genericStack.peek());
+        genericStack.push("Sweet Child");
+        System.out.println(genericStack.peek());
+        genericStack.push("Welcome to the Jungle");
+        System.out.println(genericStack.peek());
 
-        System.out.println(s.toString());
-        s.empty();
+        genericStack.empty();
 
-        //Pop not working
-        //s.pop();
-        System.out.println(s.toString());
+        //genericStack.pop();
+        System.out.println("**********");
+        System.out.println(genericStack.toString());
 
         //Testing Queue
-        GenericQueue genQueue = new GenericQueue();
+        GenericQueue genQueue = new GenericQueue(new GenericArrayList());
         genQueue.enqueue(1);
-        genQueue.enqueue(2);
+        genQueue.enqueue("Hello");
         genQueue.enqueue(3);
-        genQueue.enqueue(4);
+        System.out.println(genQueue.toString());
+        genQueue.dequeue();
+        System.out.println(genQueue.toString());
+        //Doesn't take beyond 3 elements
+        // genQueue.enqueue(4);
         System.out.println(genQueue.toString());
 //
 //        System.out.println(s);

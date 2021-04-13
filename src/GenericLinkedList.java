@@ -2,6 +2,7 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class GenericLinkedList<T> implements IList<T> {
+
     Node head; // head of list
     Node tail; // end of list
 
@@ -26,24 +27,6 @@ public class GenericLinkedList<T> implements IList<T> {
             tail = newNode;
         }
         numElements++;
-
-        /*
-        if(head == null)
-        {
-            head = newNode;
-
-        }
-    else
-        {
-            while(current.next != null)
-            {
-                current = current.next;
-            }
-            current.next = newNode;
-        }
-    numElements++;
-
-         */
     }
 
     @Override
@@ -148,6 +131,19 @@ public class GenericLinkedList<T> implements IList<T> {
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuffer buff = new StringBuffer();
+        Node current = head;
+        while (current != null) {
+            System.out.print(current.data + ", ");
+            buff.append(current.data);
+            buff.append(", ");
+            current = current.next;
+        }
+        return buff.toString();
+    }
+
     public int size() {
         return numElements;
     }
@@ -219,5 +215,12 @@ public class GenericLinkedList<T> implements IList<T> {
             }
             throw  new NoSuchElementException();
         }
+
+//        @Override
+//        public String toString() {
+//            return "GenericLinkedListIterator{" +
+//                    "current=" + current +
+//                    '}';
+//        }
     }
 }
