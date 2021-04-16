@@ -21,13 +21,25 @@ class GenericArrayListTest {
         assertEquals("whatsup", testList.get(2));
     }
 
-
-
     @Test
     void testAdd() {
         testList.add(0, "New element");
         assertEquals("New element", testList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> testList.add(10, "New element"), "Index is out of bounds Niall");
+    }
+
+    @Test
+    void test_addUntilArrayGrows() {
+        testList.add("Dan"); // 3
+        System.out.println(testList.size());
+        // Grows on this one
+        testList.add("Coff"); // 4
+        System.out.println(testList.size());
+        testList.add("Hynes"); //5
+        testList.add("Mckenna"); //6
+        // Grow on this one
+        testList.add("Ro"); // 7
+        System.out.println(testList.size()); // replace with asserts
     }
 
     @Test
