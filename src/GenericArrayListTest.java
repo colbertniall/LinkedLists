@@ -21,6 +21,8 @@ class GenericArrayListTest {
         assertEquals("whatsup", testList.get(2));
     }
 
+
+
     @Test
     void testAdd() {
         testList.add(0, "New element");
