@@ -63,17 +63,20 @@ public class GenericCollections {
      * @param <T>
      */
     public static <T extends Comparable<T>> void rotate(IList<T> list, int distance) {
-        T listElement = null;
+        distance = RotateUtils.adjustDistanceIfNeeded(distance, list.size());
+        if (RotateUtils.distanceNotZeroOrSize(distance, list.size())) {
+            return;
+        }
+
         for(int i = 0; i < distance; i++)
         {
-            listElement = list.remove( list.size() - 1 );
-            list.add(0, listElement);
+            list.add(0, list.remove( list.size() - 1 ));
         }
     }
 
     public static <T extends Comparable<T>> void rotate2(IList<T> list, int distance)
     {
-
+        list.rotate(distance);
     }
 
 }
