@@ -10,6 +10,11 @@ public class GenericStack<T> implements IStack<T>{
         this.list = list;
     }
 
+    public GenericStack() {
+
+    }
+
+
     @Override
     public void push(T element) {
         list.add(0, element);

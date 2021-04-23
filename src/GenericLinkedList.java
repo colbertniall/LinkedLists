@@ -92,6 +92,26 @@ public class GenericLinkedList<T> implements IList<T> {
         return new GenericLinkedListIterator();
     }
 
+    @Override
+    public void rotate(int distance) {
+        int n;
+        Node tail = head;
+        for(n =1; tail.next != null; n++)
+        {
+            tail = tail.next;
+        }
+        tail.next = head;
+           distance%=n;
+           Node newTail = head;
+           Node newHead = head;
+           for(int i = 1;i < n - distance;i++)
+           {
+               newTail = newTail.next;
+           }
+           newHead = newTail.next;
+           newTail.next = null;
+    }
+
     public boolean remove(T elementToRemove) {
         Node current = head;
         Node previous = head;

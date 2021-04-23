@@ -1,4 +1,6 @@
+import java.util.Collections;
 import java.util.Iterator;
+import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
@@ -81,7 +83,10 @@ public class GenericArrayList<T> implements IList<T> {
 
     @Override
     public T set(int index, T element) {
-        return null;
+        T oldNodeData = get(index);
+        remove(oldNodeData);
+        add(index, element);
+        return oldNodeData;
     }
 
     /** Retrieve an element from the list
@@ -118,6 +123,9 @@ public class GenericArrayList<T> implements IList<T> {
                 //Close the gap - move elements 1 position to the left
                 for( int i = index; i<nextFreeLoc; i++)
                 {
+                    if (i + 1 == nextFreeLoc) {
+                        break;
+                    }
                     buffer[i] = buffer[i+1];
                 }
 
@@ -153,6 +161,7 @@ public class GenericArrayList<T> implements IList<T> {
 
             nextFreeLoc--;
         }
+        else throw new IndexOutOfBoundsException("There is no element to remove there");
         return returnedValue;
     }
 
@@ -177,6 +186,14 @@ public class GenericArrayList<T> implements IList<T> {
     @Override
     public Iterator<T> iterator() {
         return new GenericArrayListIterator();
+    }
+
+    @Override
+    public void rotate(int distance) {
+        distance = distance % size();
+        for (int i = 0; i < distance; i++) {
+
+        }
     }
 
     /**
@@ -206,11 +223,11 @@ public class GenericArrayList<T> implements IList<T> {
     {
         if(nextFreeLoc == currentCapacity){
             //Allocate double the space - that will keep us going for a while
-            String[] tempArr = new String[buffer.length * 2];
+            Object[] tempArr = new Object[buffer.length * 2];
             currentCapacity *= 2;
             //copy from the old space into the new
             for(int i = 0; i < buffer.length; i++){
-                tempArr[i] = (String) buffer[i];
+                tempArr[i] = buffer[i];
             }
             //Now, update so that our managed array points at the newly created array
             buffer = (T[]) tempArr;

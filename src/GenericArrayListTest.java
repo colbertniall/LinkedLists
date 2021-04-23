@@ -21,13 +21,26 @@ class GenericArrayListTest {
         assertEquals("whatsup", testList.get(2));
     }
 
-
-
     @Test
     void testAdd() {
         testList.add(0, "New element");
         assertEquals("New element", testList.get(0));
         assertThrows(IndexOutOfBoundsException.class, () -> testList.add(10, "New element"), "Index is out of bounds Niall");
+    }
+
+    @Test
+    void test_addUntilArrayGrows() {
+        assertEquals(2, testList.size());
+        testList.add("Dan"); // 3
+        assertEquals(3, testList.size());
+        // Grows on this one
+        testList.add("Coff"); // 4
+        testList.add("Hynes"); //5
+        testList.add("Mckenna"); //6
+        assertEquals(6, testList.size());
+        testList.add("Ro"); // 7
+        System.out.println(testList.size()); // replace with asserts
+        assertEquals(7, testList.size());
     }
 
     @Test
@@ -41,6 +54,7 @@ class GenericArrayListTest {
         assertEquals(testList.size(), 2);
         testList.remove(1);
         assertEquals(testList.size(), 1);
+        assertThrows(IndexOutOfBoundsException.class, () -> testList.get(7), "Index is out of bounds in remove method");
     }
 
 }

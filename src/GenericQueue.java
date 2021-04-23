@@ -2,7 +2,7 @@ import java.util.NoSuchElementException;
 
 public class GenericQueue <T> implements IQueue <T>{
     private IList list;
-    private T topOfQueue;
+    private T backOfQueue; // change to backOfQueue
 
     public GenericQueue(IList list) {
         this.list = list;
@@ -11,7 +11,7 @@ public class GenericQueue <T> implements IQueue <T>{
     @Override
     public void enqueue(T element) {
         list.add(element);
-        topOfQueue = element;
+        backOfQueue = element;
     }
 
     @Override
