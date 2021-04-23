@@ -190,9 +190,13 @@ public class GenericArrayList<T> implements IList<T> {
 
     @Override
     public void rotate(int distance) {
-        distance = distance % size();
-        for (int i = 0; i < distance; i++) {
+        distance = RotateUtils.adjustDistanceIfNeeded(distance, size());
+        if (RotateUtils.distanceNotZeroOrSize(distance, size())) {
+            return;
+        }
 
+        for (int i = 0; i < distance; i++) {
+            add(0, remove(size() - 1));
         }
     }
 
